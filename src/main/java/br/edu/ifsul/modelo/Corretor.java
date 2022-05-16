@@ -23,7 +23,7 @@ public class Corretor extends Pessoa implements Serializable {
     
     @Min(value = 0, message = "O percentual de comissão não pode ser negativo")
     @NotNull(message = "O percentual de comissão deve ser informado")
-    @Column(name = "percentual_comissao", nullable = false, columnDefinition = "decimal(3,2)")
+    @Column(name = "percentual_comissao", nullable = false, columnDefinition = "decimal(6,2)")
     private Double percentualComissao;
     
     @NotBlank(message = "O nome de usuário não pode ser em branco")
