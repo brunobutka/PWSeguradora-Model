@@ -5,8 +5,13 @@
 package br.edu.ifsul.modelo;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -36,6 +41,15 @@ public class Corretor extends Pessoa implements Serializable {
     @Column(name = "senha", length = 20, nullable = false)
     private String senha;
     
+    @ManyToMany
+    @JoinTable(name = "permissao_corretor",
+            joinColumns = 
+                    @JoinColumn(name = "nome_usuario", referencedColumnName = "nome_usuario", nullable = false),
+            inverseJoinColumns = 
+                    @JoinColumn(name = "nome_permissao", referencedColumnName = "nome", nullable = false)
+            )
+    private Set<Permissao> permissoes = new HashSet<>();
+    
     public Corretor() {
         
     }
@@ -62,6 +76,14 @@ public class Corretor extends Pessoa implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public Set<Permissao> getPermissoes() {
+        return permissoes;
+    }
+
+    public void setPermissoes(Set<Permissao> permissoes) {
+        this.permissoes = permissoes;
     }
     
     
